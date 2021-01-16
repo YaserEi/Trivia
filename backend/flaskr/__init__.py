@@ -38,30 +38,40 @@ def create_app(test_config=None):
     def categories():
         cats=Category.query.all()
         formated_cat = [cat.format() for cat in cats]
+        print(formated_cat)
         return jsonify({
           'success': True,
-          'Categories': formated_cat
+          'categories': formated_cat[0:10]
           })
+
+      # @TODO:
+      # Create an endpoint to handle GET requests for questions,
+      # including pagination (every 10 questions).
+      # This endpoint should return a list of questions,
+      # number of total questions, current category, categories.
 
     @app.route('/questions')
     def questions():
         page = request.args.get('page',1,type=int)
         start = (page-1) *10
         end = start +10
+        all_categories=[]
+        categories = Category.query.all()
+        formated_categories = [category.format() for category in categories]
         questions = Question.query.all()
         formated_questions = [question.format() for question in questions]
+        for i in range(len(categories)):
+            all_categories.append(formated_categories[i]['type'])
         return jsonify({
         'success': True,
-        'Questions': formated_questions[start:end],
-        'total Questions:': len(formated_questions)
+        'questions': formated_questions[start:end],
+        'total_questions:': len(formated_questions),
+        'categories': all_categories,
+        # 'currentCategory':
         })
 
 
-  # @TODO:
-  # Create an endpoint to handle GET requests for questions,
-  # including pagination (every 10 questions).
-  # This endpoint should return a list of questions,
-  # number of total questions, current category, categories.
+
 
 
   # TEST: At this point, when you start the application
