@@ -41,7 +41,7 @@ def create_app(test_config=None):
         print(formated_cat)
         return jsonify({
           'success': True,
-          'categories': formated_cat[0:10]
+          'categories': formated_cat
           })
 
       # @TODO:
