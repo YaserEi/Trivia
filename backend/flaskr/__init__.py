@@ -78,9 +78,7 @@ def create_app(test_config=None):
 
     @app.route('/questions/<id>', methods=['DELETE'])
     def delete(id):
-       print(id)
        question = Question.query.filter_by(id = id).first()
-       print(question)
        try:
           db.session.delete(question)
           db.session.commit()
@@ -93,20 +91,30 @@ def create_app(test_config=None):
           'success': True
           })
 
-
-
-
-  #
-  # TEST: When you click the trash icon next to a question, the question will be removed.
-  # This removal will persist in the database and when you refresh the page.
-  # '''
-  #
-  # '''
   # @TODO:
   # Create an endpoint to POST a new question,
   # which will require the question and answer text,
   # category, and difficulty score.
-  #
+    @app.route('/questions', methods = ['POST'])
+    def add_question():
+        body=request.get_json()
+        question = body['question']
+        answer = body['answer']
+        difficulty = body['difficulty']
+        category = body['category']
+
+        add_question = Question(question = question, answer = answer, difficulty = difficulty, category = category)
+
+        try:
+            db.session.add(add_question)
+            db.session.commit()
+        except:
+            print('error')
+            db.session.rollback()
+        finally:
+            db.session.close()
+            return jsonify({ "success":True})
+
   # TEST: When you submit a question on the "Add" tab,
   # the form will clear and the question will appear at the end of the last page
   # of the questions list in the "List" tab.
