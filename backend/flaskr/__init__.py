@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import random
 
-from models import setup_db, Question, Category
+from models import setup_db, Question, Category, db
 
 QUESTIONS_PER_PAGE = 10
 
@@ -38,7 +38,6 @@ def create_app(test_config=None):
     def categories():
         cats=Category.query.all()
         formated_cat = [cat.format() for cat in cats]
-        print(formated_cat)
         return jsonify({
           'success': True,
           'categories': formated_cat
@@ -70,20 +69,33 @@ def create_app(test_config=None):
         'categories': all_categories,
         # 'currentCategory':
         })
-
-
-
-
-
   # TEST: At this point, when you start the application
   # you should see questions and categories generated,
   # ten questions per page and pagination at the bottom of the screen for three pages.
   # Clicking on the page numbers should update the questions.
-  # '''
-  #
-  # '''
   # @TODO:
   # Create an endpoint to DELETE question using a question ID.
+
+    @app.route('/questions/<id>', methods=['DELETE'])
+    def delete(id):
+       print(id)
+       question = Question.query.filter_by(id = id).first()
+       print(question)
+       try:
+          db.session.delete(question)
+          db.session.commit()
+       except:
+          print('error')
+          db.session.rollback()
+       finally:
+          db.session.close()
+          return jsonify({
+          'success': True
+          })
+
+
+
+
   #
   # TEST: When you click the trash icon next to a question, the question will be removed.
   # This removal will persist in the database and when you refresh the page.
