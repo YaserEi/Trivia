@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import random
 
+
 from models import setup_db, Question, Category, db
 
 QUESTIONS_PER_PAGE = 10
@@ -118,7 +119,19 @@ def create_app(test_config=None):
   # TEST: When you submit a question on the "Add" tab,
   # the form will clear and the question will appear at the end of the last page
   # of the questions list in the "List" tab.
-  # '''
+    @app.route('/questionSearch', methods=['POST'])
+    def search():
+        body = request.get_json()
+        search_result = Question.query.filter(Question.question.ilike('%'+body['searchTerm']+'%')).all()
+        total_questions = Question.query.all()
+        formated_result = [result.format() for result in search_result]
+        print(formated_result)
+        return jsonify({
+          'success':True,
+          'questions': formated_result,
+          'totalQuestions': len(total_questions)
+          #'currentCategory': categories
+        })
   #
   # '''
   # @TODO:
