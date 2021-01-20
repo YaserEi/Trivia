@@ -35,13 +35,16 @@ def create_app(test_config=None):
       # Create an endpoint to handle GET requests
       # for all available categories.
       # '''
-    @app.route('/categories')
+    @app.route('/categories', methods=['GET'])
     def categories():
         cats=Category.query.all()
         formated_cat = [cat.format() for cat in cats]
+        all_categories=[]
+        for i in range(len(cats)):
+            all_categories.append(formated_cat[i]['type'])
         return jsonify({
           'success': True,
-          'categories': formated_cat
+          'categories': all_categories
           })
 
       # @TODO:
@@ -153,10 +156,21 @@ def create_app(test_config=None):
   # TEST: In the "List" tab / main screen, clicking on one of the
   # categories in the left column will cause only questions of that
   # category to be shown.
-  # '''
-  #
-  #
-  # '''
+
+    @app.route('/quizzes', methods = ['POST'])
+    def quizzes():
+        body = request.get_json()
+        print(body["quiz_category"]['id'])
+        questions = Question.query.filter_by(category = body["quiz_category"]["id"]).all()
+        for i in range(len(body["previous_questions"])):
+            if i in questions:
+                del questions[i]
+        formated_questions = [question.format() for question in questions]
+        quiz_question = random.choice(formated_questions)
+        return jsonify({
+            "success": True,
+            "question": quiz_question
+        })
   # @TODO:
   # Create a POST endpoint to get questions to play the quiz.
   # This endpoint should take category and previous question parameters
