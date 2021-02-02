@@ -42,7 +42,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_add_question(self):
         res =self.client().post('/questions',
-        json= {"question": "Test question?", "answer":"Test answer", "difficulty":1, "category":1 })
+        json= {"question": "new Test question?", "answer":"Test answer", "difficulty":1, "category":1 })
         data=json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -56,6 +56,30 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'],True)
         self.assertTrue(data['totalQuestions'])
         self.assertTrue(data['questions'])
+
+    def test_get_false_q_by_Category(self):
+        res = self.client().get('/categories/100/questions')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'],False)
+
+    def test_Categories(self):
+        res = self.client().get('/categories')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['categories'])
+
+    def test_Delete(self):
+        
+        res = self.client().delete('/questions/47')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'],True)
+
 
 
 

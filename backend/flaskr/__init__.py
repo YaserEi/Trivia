@@ -68,7 +68,6 @@ def create_app(test_config=None):
           db.session.delete(question)
           db.session.commit()
        except:
-          print('error')
           db.session.rollback()
        finally:
           db.session.close()
@@ -85,7 +84,6 @@ def create_app(test_config=None):
         difficulty = body['difficulty']
         category = body['category']
 
-        print(question)
 
         add_question = Question(question = question, answer = answer, difficulty = difficulty, category = category)
 
@@ -106,7 +104,6 @@ def create_app(test_config=None):
         search_result = Question.query.filter(Question.question.ilike('%'+body['searchTerm']+'%')).all()
         total_questions = Question.query.all()
         formated_result = [result.format() for result in search_result]
-        print(formated_result)
         return jsonify({
           'success':True,
           'questions': formated_result,
@@ -116,10 +113,10 @@ def create_app(test_config=None):
 
     @app.route('/categories/<int:id>/questions', methods = ['GET'])
     def filter_questions(id):
-        print(id)
         questions = Question.query.filter_by(category = id).all()
-        formated_questions = [question.format() for question in questions]
+        print(id)
         print(questions)
+        formated_questions = [question.format() for question in questions]
         if not questions:
             abort(404)
         return jsonify({
@@ -155,14 +152,14 @@ def create_app(test_config=None):
         "success": False,
         "error": 404,
         "message":"resource not found"
-        })
+        }) , 404
     @app.errorhandler(422)
     def not_found(error):
         return jsonify({
         "success": False,
-        "error": 422,
+        "status": 422,
         "message":"resource not found"
-        })
+        }), 422
 
 
 
