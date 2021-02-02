@@ -62,7 +62,6 @@ def create_app(test_config=None):
     @app.route('/questions/<id>', methods=['DELETE'])
     def delete(id):
        question = Question.query.filter_by(id = id).first()
-       print(question)
        if not question:
            abort(422)
        try:
@@ -86,14 +85,16 @@ def create_app(test_config=None):
         difficulty = body['difficulty']
         category = body['category']
 
+        print(question)
+
         add_question = Question(question = question, answer = answer, difficulty = difficulty, category = category)
 
         try:
             db.session.add(add_question)
             db.session.commit()
         except:
-            print('error')
             db.session.rollback()
+            abort(422)
         finally:
             db.session.close()
             return jsonify({ "success":True})
@@ -115,6 +116,7 @@ def create_app(test_config=None):
 
     @app.route('/categories/<int:id>/questions', methods = ['GET'])
     def filter_questions(id):
+        print(id)
         questions = Question.query.filter_by(category = id).all()
         formated_questions = [question.format() for question in questions]
         print(questions)
@@ -136,6 +138,7 @@ def create_app(test_config=None):
             if i in questions:
                 del questions[i]
         formated_questions = [question.format() for question in questions]
+        print(formated_questions)
         quiz_question = random.choice(formated_questions)
         return jsonify({
             "success": True,
