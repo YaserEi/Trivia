@@ -20,6 +20,13 @@ class TriviaTestCase(unittest.TestCase):
         self.database_path = "postgres://{}/{}".format('localhost:5432', self.database_name)
         setup_db(self.app, self.database_path)
 
+        question = {
+        "question": "new Test question?",
+        "answer":"Test answer",
+        "difficulty":1,
+        "category":1
+
+        }
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
@@ -28,7 +35,6 @@ class TriviaTestCase(unittest.TestCase):
             self.db.create_all()
 
     def tearDown(self):
-        """Executed after reach test"""
         pass
 
     def test_get_questions(self):
@@ -42,7 +48,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_add_question(self):
         res =self.client().post('/questions',
-        json= {"question": "new Test question?", "answer":"Test answer", "difficulty":1, "category":1 })
+        json= {"question": "Test question?", "answer":"Test answer", "difficulty":1, "category":1 })
         data=json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -71,14 +77,6 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'],True)
         self.assertTrue(data['categories'])
-
-    def test_Delete(self):
-        
-        res = self.client().delete('/questions/47')
-        data = json.loads(res.data)
-
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'],True)
 
 
 
