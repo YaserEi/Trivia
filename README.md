@@ -10,13 +10,6 @@ This is a Trivia website where it allows the user to list and add questions base
 git clone git@github.com:YaserEi/Trivia.git
 ```
 
-
-## Clone Repor
-
-```
-git clone git@github.com:YaserEi/Trivia.git
-```
-
 ##  Project Structure
 
 Proceed with the steps in the readme in the backend folder.<br />
