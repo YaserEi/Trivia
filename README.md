@@ -19,6 +19,6 @@ git clone git@github.com:YaserEi/Trivia.git
 
 ##  Project Structure
 
-Proceed with the steps in the readme in the backend folder.__
-Proceed with the steps in the readme in the front folder.__
+Proceed with the steps in the readme in the backend folder.<br />
+Proceed with the steps in the readme in the front folder.
 
