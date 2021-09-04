@@ -2,10 +2,10 @@
 
 ## Introduction
 
-Trivia is a question site that facilitates the discovery and bookings of shows between local performing artists and venues. This site lets you list new artists and venues, discover them, and list shows with artists as a venue owner.
+This is a Trivia website where it allows the user to list and add questions based on category and difficulty. The user can also play a trivia game with the questions avilable. 
 
 ## Clone Repor
 
 ```
-git clone git@github.com:YaserEi/Project-Fyyur.git
+git clone git@github.com:YaserEi/Trivia.git
 ```
