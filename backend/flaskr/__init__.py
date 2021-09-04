@@ -113,6 +113,7 @@ def create_app(test_config=None):
 
     @app.route('/categories/<int:id>/questions', methods = ['GET'])
     def filter_questions(id):
+        id +=1
         questions = Question.query.filter_by(category = id).all()
         print(id)
         print(questions)
@@ -142,10 +143,8 @@ def create_app(test_config=None):
             "question": quiz_question
         })
 
-  # @TODO:
+ 
   # Create error handlers for all expected errors
-  # including 404 and 422.
-  # '''
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({

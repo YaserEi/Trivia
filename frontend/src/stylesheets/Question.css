@@ -6,10 +6,14 @@
 .categories-list {
   flex-basis: 25%;
   flex-shrink: 2;
+  cursor: pointer;
+  
 }
 
+
 .categories-list > form {
-  width: 60%;
+  width: 40%;
+  
 }
 
 .questions-list {
@@ -31,6 +35,7 @@
   width: 200px;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .Question {
@@ -51,6 +56,7 @@
   color: white;
   padding: 3px 5px;
   margin-left: 0px !important;
+  cursor: pointer;
 }
 
 span.page-num {
