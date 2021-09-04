@@ -34,10 +34,7 @@ This will install all of the required packages we selected within the `requireme
 - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
 
 ## Database Setup
-With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
-```bash
-psql trivia < trivia.psql
-```
+
 
 ## Running the server
 
@@ -45,7 +42,7 @@ From within the `backend` directory first ensure you are working using your crea
 
 To run the server, execute:
 
-```bash
+```
 export FLASK_APP=flaskr
 export FLASK_ENV=development
 flask run
