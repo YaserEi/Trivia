@@ -15,6 +15,10 @@ deactivate #deactivates virtual env
 
 ### Installing Dependencies
 
+### Install Postgres
+
+Install postgres using this link: https://postgresapp.com/
+
 #### PIP Dependencies
 
 Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
