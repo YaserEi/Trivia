@@ -11,5 +11,10 @@ psycopg2-binary==2.8.2
 pytz==2019.1
 six==1.12.0
 SQLAlchemy==1.3.4
+<<<<<<< HEAD
 Werkzeug
 sqlalchemy_utils
+=======
+Werkzeug==0.15.5
+sqlalchemy_utils
+>>>>>>> db6a2b56f88079de708805ca63c33a56a64eb05b

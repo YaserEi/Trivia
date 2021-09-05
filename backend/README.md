@@ -15,6 +15,20 @@ deactivate #deactivates virtual env
 
 ### Installing Dependencies
 
+
+
+### Database Setup
+
+## Install Postgres
+
+Install postgres using this link: https://postgresapp.com/
+
+
+With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
+```bash
+psql trivia < trivia.psql
+```
+
 #### PIP Dependencies
 
 Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
