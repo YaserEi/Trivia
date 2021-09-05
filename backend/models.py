@@ -6,7 +6,7 @@ from sqlalchemy_utils import database_exists, create_database
 import sqlalchemy
 
 database_name = "trivia"
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+database_path = "postgres://{}/{}".format('5432', database_name)
 
 db = SQLAlchemy()
 
