@@ -2,11 +2,17 @@ import os
 import unittest
 import json
 
+import sys; 
+
+print (sys.path)
+
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
 
 from flaskr import create_app
 from models import setup_db, Question, Category, db
+
+
 
 
 class TriviaTestCase(unittest.TestCase):
